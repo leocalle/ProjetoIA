@@ -18,7 +18,7 @@ Este é um aplicativo Flask para uma loja de música, onde os usuários podem vi
    
    ```bash
    pip install -r requirements.txt
-   
+   ```bash
    
    
  7. Abra a pasta do projeto em algum editor de códigos(recomendação: VS code).
