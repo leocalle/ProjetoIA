@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Loja de Música</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cacaca;
+            margin: 0;
+        }
+
+        #elementoInfo {
+           
+            
+            margin: 10px;
+            
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+            text-align: center;
+            margin-top: 100px;
+           
+            
+       
+        }
+
+        .header {
+            background-color: #0b0b0b;
+            color: #0c0c0c;
+            padding: 10px;
+            height: 100px;
+            width: 100%;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 40px;
+            margin-left: 30px;
+        }
+
+        hr {
+            border: none;
+            border-top: 20px solid #fe9708;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        
+        #filtro {
+            margin-bottom: 20px;
+            padding-top: 180px;
+            padding-left: 40px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #elementoInfo .imagem {
+    width: 200px;
+    height: 200px;
+}
+
+        #produtos {
+            display: flex;
+            flex-wrap: wrap;
+            
+            justify-content: center;
+        }
+
+        .produto {
+            width: calc(33.33% - 20px); /* 33.33% para três produtos por linha com margens laterais de 20px */
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+            
+        }
+
+        .produto:nth-child(3n+1) {
+            margin-left: 10; /* Remover margem esquerda para o primeiro produto em cada linha */
+        }
+
+        .produto:nth-child(3n) {
+            margin-right: 10; /* Remover margem direita para o último produto em cada linha */
+        }
+
+        .produto:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .produto h3 {
+            font-size: 18px;
+            margin: 0;
+            color: #333;
+        }
+
+        .produto p {
+            font-size: 14px;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .produto .imagem {
+            width: 300px;
+            height: 300px;
+        }
+
+
+        .produto .btn-comprar {
+            display: block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #fe9708;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .produto .btn-comprar:hover {
+            background-color: #ffab48;
+        }
+
+        .produto .imagem {
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="header">
+        <img src="{{ url_for('static', filename='imagem/imagem.png') }}" alt="Minha Imagem" width="200" height="100">
+    </div>
+    <hr>
+
+    <div id="elementoInfo" ></div>
+
+
+
+
+
+
+    <div id="filtro">
+        <label for="categoria">Filtrar por categoria:</label>
+        <select id="categoria" onchange="filtrarPorCategoria()">
+            <option value="">Todas as categorias</option>
+            <option value="violao">Violão</option>
+            <option value="teclado">Teclado</option>
+            <option value="guitarra">Guitarra</option>
+            <option value="bateria">Bateria</option>
+        </select>
+    </div>
+
+    <div id="produtos">
+
+        <div class="produto violao">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/violao A.jpg') }}" alt="Minha Imagem"  >
+            <h3>Violão A</h3>
+            <p>R$ 500,00</p>
+            <button class="btn-comprar" data-nome="Violão A" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto violao">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/violao B.jpg') }}" alt="Minha Imagem">
+            <h3>Violão B</h3>
+            <p>R$ 800,00</p>
+            <button class="btn-comprar" data-nome="Violão B" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto violao">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/violão C.jpg') }}" alt="Minha Imagem">
+            <h3>Violão C</h3>
+            <p>R$ 1200,00</p>
+            <button class="btn-comprar" data-nome="Violão C" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto violao">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/violao D.jpg') }}" alt="Minha Imagem">
+            <h3>Violão D</h3>
+            <p>R$ 2200,00</p>
+            <button class="btn-comprar" data-nome="Violão D" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto violao">
+            <img class="imagem" src="{{ url_for('static', filename='imagem/violão E.jpg') }}" alt="Minha Imagem">
+            <h3>Violão E</h3>
+            <p>R$ 4000,00</p>
+            <button class="btn-comprar" data-nome="Violão E" onclick="adicionarProduto(this)">Comprar</button>
+        </div><br><br><br>
+
+              
+
+
+        <div class="produto teclado">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/teclado A.jpg') }}" alt="Minha Imagem"  >
+            <h3>Teclado A</h3>
+            <p>R$ 500,00</p>
+            <button class="btn-comprar" data-nome="Teclado A" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto teclado">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/teclado B.jpg') }}" alt="Minha Imagem">
+            <h3>Teclado B</h3>
+            <p>R$ 800,00</p>
+            <button class="btn-comprar" data-nome="Teclado B" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto teclado">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/teclado C.jpg') }}" alt="Minha Imagem">
+            <h3>Teclado C</h3>
+            <p>R$ 1200,00</p>
+            <button class="btn-comprar" data-nome="Teclado C" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto teclado">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/teclado D.jpg') }}" alt="Minha Imagem">
+            <h3>Teclado D</h3>
+            <p>R$ 2200,00</p>
+            <button class="btn-comprar" data-nome="Teclado D" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto teclado">
+            <img class="imagem" src="{{ url_for('static', filename='imagem/teclado E.jpg') }}" alt="Minha Imagem">
+            <h3>Teclado E</h3>
+            <p>R$ 4000,00</p>
+            <button class="btn-comprar" data-nome="Teclado E" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+      
+
+
+
+
+        <div class="produto bateria">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/bateria A.jpg') }}" alt="Minha Imagem"  >
+            <h3>Bateria A</h3>
+            <p>R$ 500,00</p>
+            <button class="btn-comprar" data-nome="Bateria A" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto bateria">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/bateria B.jpg') }}" alt="Minha Imagem">
+            <h3>Bateria B</h3>
+            <p>R$ 800,00</p>
+            <button class="btn-comprar" data-nome="Bateria B" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto bateria">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/bateria C.jpg') }}" alt="Minha Imagem">
+            <h3>Bateria C</h3>
+            <p>R$ 1200,00</p>
+            <button class="btn-comprar" data-nome="Bateria C" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto bateria">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/bateria D.jpg') }}" alt="Minha Imagem">
+            <h3>Bateria D</h3>
+            <p>R$ 2200,00</p>
+            <button class="btn-comprar" data-nome="Bateria D" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto bateria">
+            <img class="imagem" src="{{ url_for('static', filename='imagem/bateria E.jpg') }}" alt="Minha Imagem">
+            <h3>Bateria E</h3>
+            <p>R$ 4000,00</p>
+            <button class="btn-comprar" data-nome="Bateria E" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+
+
+
+
+
+
+
+
+        <div class="produto guitarra">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/guitarra A.jpg') }}" alt="Minha Imagem"  >
+            <h3>Guitarra A</h3>
+            <p>R$ 500,00</p>
+            <button class="btn-comprar" data-nome="Guitarra A" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto guitarra">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/guitarra B.jpg') }}" alt="Minha Imagem">
+            <h3>Guitarra B</h3>
+            <p>R$ 800,00</p>
+            <button class="btn-comprar" data-nome="Guitarra B" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto guitarra">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/guitarra C.jpg') }}" alt="Minha Imagem">
+            <h3>Guitarra C</h3>
+            <p>R$ 1200,00</p>
+            <button class="btn-comprar" data-nome="Guitarra C" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto guitarra">
+            <img class="imagem " src="{{ url_for('static', filename='imagem/guitarra D.jpg') }}" alt="Minha Imagem">
+            <h3>Guitarra D</h3>
+            <p>R$ 2200,00</p>
+            <button class="btn-comprar" data-nome="Guitarra D" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+
+        <div class="produto guitarra">
+            <img class="imagem" src="{{ url_for('static', filename='imagem/guitarra E.jpg') }}" alt="Minha Imagem">
+            <h3>Guitarra E</h3>
+            <p>R$ 4000,00</p>
+            <button class="btn-comprar" data-nome="Guitarra E" onclick="adicionarProduto(this)">Comprar</button>
+        </div>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+        function filtrarPorCategoria() {
+            var select = document.getElementById("categoria");
+            var categoria = select.value.toLowerCase();
+
+            var produtos = document.getElementsByClassName("produto");
+
+            for (var i = 0; i < produtos.length; i++) {
+                var produto = produtos[i];
+                var categoriasProduto = produto.classList;
+
+                if (categoria === "" || categoriasProduto.contains(categoria)) {
+                    produto.style.display = "block";
+                } else {
+                    produto.style.display = "none";
+                }
+            }
+        }
+
+        function adicionarProduto(botao) {
+            var nome = botao.dataset.nome;
+            var produtoReferencia = null;
+            var elementoInfo = document.getElementById('elementoInfo');
+
+            console.log("Produto selecionado: " + nome);
+            // Faça o que desejar com o produto selecionado
+            // Faça uma requisição HTTP POST para enviar o valor de produtoReferencia para o servidor Python
+            fetch("/comparar-produto", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ valor: nome })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error("Erro na requisição");
+            })
+            .then(data => {
+                // Receba a resposta do servidor com o produto correspondente
+                var produtoEncontrado = data.produto;
+                if (produtoEncontrado) {
+                    // Limpa o conteúdo anterior
+                    elementoInfo.innerHTML = "";
+
+
+
+                    var tituloRecomendacoes = document.createElement("h2");
+tituloRecomendacoes.textContent = "Recomendações";
+
+elementoInfo.appendChild(tituloRecomendacoes);
+
+var tituloRecomendacoes = document.createElement("h4");
+tituloRecomendacoes.textContent = "Produtos similares";
+
+elementoInfo.appendChild(tituloRecomendacoes);
+
+                    
+                     // Cria um elemento <img> para exibir a imagem do produto
+                     var imagemProduto = document.createElement("img");
+                    imagemProduto.classList.add("imagem");
+                    imagemProduto.src = produtoEncontrado.src;
+                    elementoInfo.appendChild(imagemProduto);
+
+
+                    // Cria um elemento <h3> para exibir o nome do produto
+                    var nomeProduto = document.createElement("h3");
+                    nomeProduto.textContent = produtoEncontrado.nome;
+                    elementoInfo.appendChild(nomeProduto);
+
+                    // Cria um elemento <p> para exibir o preço do produto
+                    var precoProduto = document.createElement("p");
+                    precoProduto.textContent = "Preço: R$ " + produtoEncontrado.preco;
+                    elementoInfo.appendChild(precoProduto);
+
+        
+
+                   
+
+                    // Faça o que desejar com o produto encontrado
+                    // Por exemplo, atribua-o à variável produto_referencia no HTML
+
+                } else {
+                    console.log("Produto não encontrado");
+                }
+            })
+            .catch(error => {
+                console.error("Erro na requisição: ", error);
+            });
+
+
+
+
+
+
+         
+        }
+    </script>
+
+    <div id="elementoInfo"></div>
+
+    
+</body>
+</html>
