@@ -17,8 +17,8 @@ Este é um aplicativo Flask para uma loja de música, onde os usuários podem vi
  6. O próximo passo é aplicar esse comando no prompt, nele está contido a biblioteca Flask com sua respectiva versão:
 
 
-    ```bash
-   <pip install -r requirements.txt>
+  
+   pip install -r requirements.txt
    
    
  7. Abra a pasta do projeto em algum editor de códigos(recomendação: VS code).
